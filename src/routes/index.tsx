@@ -26,7 +26,7 @@ function Index(){
  const add=(p:Product)=>{if(p.price===null){window.open(whatsappUrl(`Hello Isaro! I would like the price and availability of ${p.name}.`),'_blank','noopener,noreferrer');return;} setBag(prev=>({...prev,[p.id]:(prev[p.id]??0)+1}));setAdded(p.id);window.setTimeout(()=>setAdded(null),1500);};
  const change=(id:string,amount:number)=>setBag(prev=>({...prev,[id]:Math.max(0,(prev[id]??0)+amount)}));
  const viewAll=()=>{setExpanded(true);setCategory('All essentials');setQuery('');};
- const order=whatsappUrl(`Hello Isaro! I would like to order:\n${products.filter(p=>(bag[p.id]??0)>0).map(p=>`${bag[p.id]} × ${p.name} — ${formatPrice((p.price??0)*bag[p.id])}`).join('\n')}\nProduct total: ${formatPrice(bagTotal(bag))}\nPlease confirm availability and delivery details. Thank you!`);
+ const order=whatsappUrl(`Hello Isaro! I would like to order:\n${products.filter(p=>(bag[p.id]??0)>0).map(p=>`${bag[p.id]} × ${p.name} — ${formatPrice((p.price??0)*(bag[p.id]??0))}`).join('\n')}\nProduct total: ${formatPrice(bagTotal(bag))}\nPlease confirm availability and delivery details. Thank you!`);
  return <>
   <div className="announcement"><Sparkles size={12}/> A little care. A little confidence. A beautiful you. <Sparkles size={12}/></div>
   <header className="header container-wide">
